@@ -1,0 +1,55 @@
+#lang racket
+(define (FtoC temp)
+  (/ (- temp 32) (/ 9 5)))
+
+(define (convertFC temps)
+  (map FtoC temps))
+
+(define (check-temps temps low high)
+  (andmap (lambda (x)
+            (cond
+              [(> x high) false]
+              [(< x low) false]
+              [else true]))
+          temps))
+
+(define (check-temps1 temps)
+  (check-temps temps 5 95))
+
+(define (next-bigger? digits index)
+  (if (empty? digits)
+      (list 0)
+      (append
+       (list (* (first digits) index))
+       (next-bigger? (rest digits) (* index 10)))))
+      
+(define (convert digits)
+  (foldr + 0 (next-bigger? digits 1)))
+
+(define (double item)
+  (append
+   (list item)
+   (list item)))
+
+(define (duple lst)
+  (map double lst))
+
+(define (average lst)
+  (/ (foldr + 0 lst) (length lst)))
+
+(define (smaller? num lst)
+  (if (empty? lst)
+      true
+      (and (cond
+             [(> num (first lst)) false]
+             [else (smaller? num (rest lst))]))))
+
+(define (eliminate-larger lst)
+  (if (empty? lst)
+      null
+      (if (smaller? (first lst) (rest lst))
+          (cons (first lst) (eliminate-larger (rest lst)))
+          (eliminate-larger (rest lst)))))
+
+(define (curry2 func)
+  (lambda (x) (lambda (y) (func x y))))

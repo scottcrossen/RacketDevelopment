@@ -1,0 +1,60 @@
+#lang racket
+(define (check-temps1 temps)
+  (check-temps temps 5 95))
+(define (check-temps temps low high)
+  (cond[(empty? temps) #t][(< (first temps) low) #f][(< high (first temps)) #f][#t (check-temps (rest temps) low high)]))
+(define (convert digits)
+  (cond[(empty? digits) 0][#t (+ (* 10 (convert (rest digits))) (first digits))]))
+(define (duple lst)
+  (cond[(empty? lst) null][#t (append (list (list (first lst) (first lst)) ) (duple (rest lst)))]))
+(define (average lst)
+  (/ (for/sum ([i '(1 2 3 4)]) i) (length lst)))
+(define (convertFC temps)
+  (cond[(empty? temps) null][#t (append (list (/ (* (- (first temps) 32) 5) 9)) (convertFC (rest temps)))]))
+(define (maxl list)
+  (cond[(equal?(length list) 2) (max (first list) (second list))][#t (max (first list) (maxl (rest list)))]))
+(define (eliminate-larger lst)
+  (cond
+    [(empty? lst) null]
+    [(equal? (length lst) 1) lst]
+    [(and (equal? (length lst) 2) (<= (first lst) (second lst))) lst ]
+    [(and (equal? (length lst) 2) (> (first lst) (second lst))) (rest lst) ]
+    [(>= (first lst) (maxl (rest lst))) (eliminate-larger (rest lst))]
+    [#t (append (list (first lst)) (eliminate-larger (rest lst)))]))
+(define (get-nth lst n)
+  (cond
+    [(equal? n 0) (first lst)]
+    [#t (get-nth (rest lst) (- n 1))]))
+(define (find-item lst target)
+  (cond
+    [(empty? lst) -1]
+    [(equal? (first lst) target) 0]
+    [(equal? (find-item (rest lst) target) -1) -1]
+    [#t (+ (find-item (rest lst) target) 1)]))
+  
+#!/"testing check-temps"
+#!/(equal? (check-temps1 '(4.99 56 95)) #f)
+#!/(equal? (check-temps1 '(95.01 56 95)) #f)
+#!/(equal? (check-temps1 '(5 56 4.999)) #f)
+#!/(equal? (check-temps1 '(5 56 95.1)) #f)
+#!/(equal? (check-temps1 '(5 56 95)) #t)
+#!/"testing convert"
+#!/(equal? (convert '(1 2 3)) 321)
+#!/(equal? (convert '(1)) 1)
+#!/"testing duple"
+#!/(equal? (duple '(1 2 3)) '((1 1) (2 2) (3 3)))
+#!/(equal? (duple '((1 2) 2 3)) '(((1 2) (1 2)) (2 2) (3 3)))
+#!/"testing average"
+#!/(equal? (average (list 1 2 3 4)) 5/2)
+#!/"testing convertFC"
+#!/(equal? (convertFC (list 32 50 212)) '(0 10 100))
+#!/"testing maxl"
+#!/(equal? (maxl (list 1 2 3 9 4 5)) 9)
+#!/"testing eliminate-larger"
+#!/(equal? (eliminate-larger (list 1 2 3 9 4 5)) '(1 2 3 4 5))
+#!/"testing get-nth"
+#!/(equal? (get-nth (list 1 2 3 4) 2) 3)
+#!/(equal? (get-nth (list 1 2 3 4) 0) 1)
+#!/"testing find-item"
+#!/(equal? (find-item (list 1 2 3 4) 3) 2)
+#!/(equal? (find-item (list 1 2 3 4) 42) -1)
