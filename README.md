@@ -11,13 +11,13 @@ some of the requirements for the BYU course titled CS 330. This repository is wr
 
 Project details can be found in the appropriate links below.
 
-[Lab 1 - Racket Basics](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:racketbasics>)
+[Lab 1 - Racket Basics](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:racketbasics)
 
-[Lab 2 - Racket Lists and Recursion](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:racketlists>)
+[Lab 2 - Racket Lists and Recursion](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:racketlists)
 
-[Lab 3 - Racket Higher-Order Functions](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:rackethof>)
+[Lab 3 - Racket Higher-Order Functions](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:rackethof)
 
-[Lab 4 - More Higher-Order Functions](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:rackethof2>)
+[Lab 4 - More Higher-Order Functions](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:rackethof2)
 
 [Lab 16 - Type checking](http://liftothers.org/dokuwiki/doku.php?id=cs330_f2016:lab16)
 
